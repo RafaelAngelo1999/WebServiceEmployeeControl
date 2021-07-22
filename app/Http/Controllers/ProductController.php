@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Helpers\Utils;
-use App\Models\Squads\Squad;
+use App\Models\Office;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class SquadController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,7 @@ class SquadController extends Controller
     public function index()
     {
         try {
-            return Utils::buildReturnSuccessStatement(Squad::all());
+            return Utils::buildReturnSuccessStatement(Product::all());
         } catch (\Exception $e) {
             return Utils::buildReturnErrorStatement($e->getMessage());
         }
@@ -33,13 +34,15 @@ class SquadController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|unique:squad,name|max:191',
+                'name' => 'required|unique:product,name|max:191',
                 'description' => 'max:191',
+                'leader_id' => 'required',
+                'squad_id' => 'required',
             ]);
 
-            $squad = Squad::create($request->all());
+            $product = Product::create($request->all());
 
-            return Utils::buildReturnSuccessStatement($squad);
+            return Utils::buildReturnSuccessStatement($product);
         } catch (ValidationException $e) {
             return Utils::buildReturnErrorStatement($e->errors());
         } catch (\Exception $e) {
@@ -56,7 +59,7 @@ class SquadController extends Controller
     public function show($id)
     {
         try {
-            return Utils::buildReturnSuccessStatement(Squad::find($id));
+            return Utils::buildReturnSuccessStatement(Product::find($id));
         } catch (\Exception $e) {
             return Utils::buildReturnErrorStatement($e->getMessage());
         }
@@ -73,14 +76,16 @@ class SquadController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|unique:squad,name|max:191',
+                'name' => 'required|unique:product,name|max:191',
                 'description' => 'max:191',
+                'leader_id' => 'required',
+                'squad_id' => 'required',
             ]);
 
-            $squad = Squad::find($id);
-            $squad->update($request->all());
+            $product = Product::find($id);
+            $product->update($request->all());
 
-            return Utils::buildReturnSuccessStatement($squad);
+            return Utils::buildReturnSuccessStatement($product);
         } catch (ValidationException $e) {
             return Utils::buildReturnErrorStatement($e->errors());
         } catch (\Exception $e) {
@@ -97,7 +102,7 @@ class SquadController extends Controller
     public function destroy($id)
     {
         try {
-            Squad::destroy($id);
+            Product::destroy($id);
             return Utils::buildReturnSuccess();
         } catch (\Exception $e) {
             if ($e->getCode() == 23000) 

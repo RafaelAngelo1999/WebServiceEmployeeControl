@@ -16,6 +16,7 @@ class CreateSquad extends Migration
         Schema::create('squad', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

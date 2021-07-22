@@ -5,6 +5,13 @@ namespace App\Http\Controllers\Helpers;
 
 class Utils
 {
+    public static function buildReturnSuccess()
+    {
+        return response()->json([
+            'success' => true,
+        ]);
+    }
+
     public static function buildReturnSuccessStatement($data)
     {
         return response()->json([

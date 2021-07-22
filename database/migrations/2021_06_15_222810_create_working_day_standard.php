@@ -35,6 +35,6 @@ class CreateWorkingDayStandard extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('working_day');
+        Schema::dropIfExists('working_day_standard');
     }
 }

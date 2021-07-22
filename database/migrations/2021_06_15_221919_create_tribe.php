@@ -15,9 +15,9 @@ class CreateTribe extends Migration
     {
         Schema::create('tribe', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('squad_id')->unsigned();
+            $table->string('name');
+            $table->string('description')->nullable();
 
-            $table->foreign('squad_id')->references('id')->on('squad');
             $table->timestamps();
         });
     }

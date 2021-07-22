@@ -16,8 +16,8 @@ class CreateEmployee extends Migration
         Schema::create('employee', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('obs');
-            $table->boolean('standard')->nullable();
+            $table->string('description')->nullable();
+            $table->boolean('standard')->default(0);
             $table->unsignedBigInteger('office_id')->unsigned();
             $table->unsignedBigInteger('employee_status_id')->unsigned();
             
@@ -34,6 +34,8 @@ class CreateEmployee extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('employee');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -16,6 +16,8 @@ class CreateEmployeeStatus extends Migration
         Schema::create('employee_status', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
+            
             $table->timestamps();
         });
     }

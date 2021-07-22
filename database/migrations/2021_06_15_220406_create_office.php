@@ -16,6 +16,7 @@ class CreateOffice extends Migration
         Schema::create('office', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

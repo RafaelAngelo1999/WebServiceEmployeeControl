@@ -13,6 +13,6 @@ class Tribe extends Model
     protected $fillable = 
     [
         'name',
-        'squad_id'
+        'description',
     ];
 }
